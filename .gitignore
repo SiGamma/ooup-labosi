@@ -13,3 +13,6 @@
 *.a
 
 *.zip
+*.swp
+*.swo
+*.out
