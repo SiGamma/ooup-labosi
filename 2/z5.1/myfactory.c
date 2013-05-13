@@ -3,10 +3,20 @@
 #include <dlfcn.h>
 #include <string.h>
 
+
+typedef char const* (*PTRFUN)();
+struct Animal{
+  PTRFUN* vtable;
+  // vtable entries:
+  // 0: char const* name(void* this);
+  // 1: char const* greet();
+  // 2: char const* menu();
+};
+
 void* myfactory(char const* libname, char const* ctorarg) {
   char *filename = (char *)malloc ((strlen(libname) + 4) * sizeof(char));
   void *handle;
-  void *(*create)(char const*);
+  void *(*create)();
   char *error;
   void *result;
 
@@ -28,7 +38,7 @@ void* myfactory(char const* libname, char const* ctorarg) {
   }
 
   result = (*create)(ctorarg);
-  
-  dlclose(handle);
+
+
   return result;
 }

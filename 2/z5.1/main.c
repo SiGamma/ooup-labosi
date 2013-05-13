@@ -22,13 +22,12 @@ void animalPrintGreeting (struct Animal *animal) {
 }
 
 void animalPrintMenu (struct Animal *animal) {
-  printf ("%s voli: %s\n", animal->vtable[0], animal->vtable[2]());
+  printf ("%s voli: %s\n", animal->vtable[0](), animal->vtable[2]());
 }
 
 int main(void){
   struct Animal* p1=(struct Animal*)myfactory("parrot", "Modrobradi");
-  struct Animal* p2=(struct Animal*)myfactory("parrot", "Modrobradi");
-  //struct Animal* p2=(struct Animal*)myfactory("tiger", "Straško");
+  struct Animal* p2=(struct Animal*)myfactory("tiger", "Straško");
   if (!p1 || !p2){
     printf("Creation of plug-in objects failed.\n");
     exit(1);
@@ -40,5 +39,6 @@ int main(void){
   animalPrintMenu(p1);//"brazilske orahe"
   animalPrintMenu(p2);//"mlako mlijeko"
 
-  free(p1); free(p2); 
+  free(p1);
+  free(p2); 
 }

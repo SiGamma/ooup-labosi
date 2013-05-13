@@ -7,27 +7,29 @@ typedef char const* (*PTRFUN)();
 typedef struct {
   PTRFUN* vtable;
   char *name;
-} Parrot;
+} Tiger;
 
 char const *greet() {
-  return "Sto mu gromova!";
+  return "mijau";
 }
 
 char const *menu() {
-  return "crackers";
+  return "mlijeko";
 }
 
-char const *name(Parrot *p) {
-  return p->name;
+char const *name(Tiger *tiger) {
+  return tiger->name;
 }
 
 PTRFUN funTable[3] = {name, greet, menu};
 
 void *create (char const* name) {
-  Parrot *p = (Parrot *)malloc (sizeof (Parrot));
+  Tiger *p = (Tiger *)malloc (sizeof (Tiger));
   p->name = (char *)name;
   p->vtable =(PTRFUN*) malloc (3*sizeof(PTRFUN*));
   memcpy (p->vtable, funTable, 3*sizeof(PTRFUN*));
 
-  return p;
+  //printf ("%s\n", (p->vtable[0])());
+
+  return (void*)p;
 }
